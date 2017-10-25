@@ -32,37 +32,20 @@ const client = new Client(config.server, 'zBzBOT', {
   autoRejoin: true
 });
 
-client.addListener('raw', (message: any) => {
-  console.log(`${message.command === 'PRIVMSG'} and ${message.args[0] === config.channel}`);
-  if (message.command === 'PRIVMSG' && message.args[0] === config.channel) {
-    console.log(`${message.args[1]} and ${message.args[1].match(getCommandRegex())} or ${getCommandRegex().test(message.args[1])}`);
-    if (getCommandRegex().test(message.args[1])) {
-      console.log(`${message.nick}: ${message.args[1]}`);
+client.addListener(`message${config.channel}`, (sender: string, message: string): void => {
+  if (getCommandRegex().test(message)) {
+    console.log(`${sender}: ${message}`);
 
-      setTimeout(() => {
-        uinput.key_event(stream, toKey(message.args[1] as allowedInputs), () => {
-          console.log(`key event triggered: ${toKey(message.args[1] as allowedInputs)}`);
-        });
-      }, config.delay);
-    }
+    setTimeout(() => {
+      uinput.key_event(stream, toKey(message as allowedInputs), (error: Error) => {
+        console.log(`key event triggered: ${toKey(message as allowedInputs)}`);
+        if (error) {
+          throw error;
+        }
+      });
+    }, config.delay);
   }
 });
-
-// client.addListener(`message${config.channel}`, (sender: string, message: string): void => {
-//   console.log('msg: ', message);
-//   if (message.match(getCommandRegex())) {
-//     console.log(`${sender}: ${message}`);
-
-//     setTimeout(() => {
-//       uinput.key_event(stream, toKey(message as allowedInputs), (error: Error) => {
-//         console.log(`key event triggered: ${toKey(message as allowedInputs)}`);
-//         if (error) {
-//           throw error;
-//         }
-//       });
-//     }, config.delay);
-//   }
-// });
 
 client.addListener('error', (message: Error): void => {
   console.log('error:', message);
