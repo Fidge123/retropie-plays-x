@@ -20,7 +20,7 @@ if (argv.h || argv.help) {
 
 const config = {
   server: argv.s || 'freenode.net',
-  channel: argv.c || 'zBzLAN#27',
+  channel: argv.c || '#zBzLAN27',
   port: argv.p || 7000,
   delay: argv.d || 100
 };
