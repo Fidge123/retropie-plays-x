@@ -54,7 +54,9 @@ client.addListener('error', (message: Error): void => {
 
 client.connect(5, () => {
   console.log('Connection successful!');
-  client.say(config.channel, 'BEEP BOOP, I am a bot!');
+  setTimeout(() => {
+    client.say(config.channel, 'BEEP BOOP, I am a bot!');
+  }, 5000);
 });
 console.log('Connecting...');
 
