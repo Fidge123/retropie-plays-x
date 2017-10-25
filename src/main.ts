@@ -32,6 +32,10 @@ const client = new Client(config.server, 'zBzBOT', {
   autoRejoin: true
 });
 
+client.addListener('raw', (message: any) => {
+  console.log(message);
+});
+
 client.addListener(`message${config.channel}`, (sender: string, message: string): void => {
   console.log('got msg');
   if (message.match(getCommandRegex())) {
