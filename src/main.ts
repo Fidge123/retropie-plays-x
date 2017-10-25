@@ -33,7 +33,7 @@ const client = new Client(config.server, 'zBzBOT', {
 });
 
 client.addListener('raw', (message: any) => {
-  console.log(message);
+  console.log('raw: ', message);
 });
 
 client.addListener(`message${config.channel}`, (sender: string, message: string): void => {
