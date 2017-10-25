@@ -33,9 +33,10 @@ const client = new Client(config.server, 'zBzBOT', {
 });
 
 client.addListener('raw', (message: any) => {
-  console.log('raw: ', message);
+  console.log(`${message.command === 'PRIVMSG'} and ${message.args[0] === config.channel}`);
   if (message.command === 'PRIVMSG' && message.args[0] === config.channel) {
-    if (message.match(getCommandRegex())) {
+    console.log(`${message.args[1]} and ${message.args[1].match(getCommandRegex())} or ${getCommandRegex().test(message.args[1])}`);
+    if (getCommandRegex().test(message.args[1])) {
       console.log(`${message.nick}: ${message.args[1]}`);
 
       setTimeout(() => {
