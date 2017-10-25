@@ -48,8 +48,8 @@ client.addListener(`message${config.channel}`, (sender: string, message: string)
   }
 });
 
-client.addListener('error', (message: string): void => {
-  console.log(`error: ${message}`);
+client.addListener('error', (message: Error): void => {
+  console.log('error:', message);
 });
 
 client.connect(5, () => {
