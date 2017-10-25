@@ -19,26 +19,27 @@ if (argv.h || argv.help) {
 }
 
 const config = {
-  server: argv.s || 'freenode.net',
+  server: argv.s || 'tolkien.freenode.net',
   channel: argv.c || '#zBzLAN27',
-  port: argv.p || 7000,
+  port: argv.p || 6667,
   delay: argv.d || 100
 };
 
 const client = new Client(config.server, 'zBzBOT', {
   channels: [config.channel],
   port: config.port,
-  secure: true,
   autoConnect: false,
   autoRejoin: true
 });
 
-client.addListener('message', (sender: string, message: string): void => {
+client.addListener(`message${config.channel}`, (sender: string, message: string): void => {
+  console.log('got msg');
   if (message.match(getCommandRegex())) {
     console.log(`${sender}: ${message}`);
 
     setTimeout(() => {
       uinput.key_event(stream, toKey(message as allowedInputs), (error: Error) => {
+        console.log(`key event triggered: ${toKey(message as allowedInputs)}`);
         if (error) {
           throw error;
         }
