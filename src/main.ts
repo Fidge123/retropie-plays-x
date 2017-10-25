@@ -53,6 +53,7 @@ client.addListener('error', (message: string): void => {
 });
 
 client.connect();
+console.log('Connecting...');
 
 uinput.setup(getSetupOptions(), (err0: Error, tempStream: any): void => {
   if (err0) {
