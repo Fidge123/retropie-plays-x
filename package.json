@@ -7,6 +7,7 @@
     "node": ">= 6.9.0"
   },
   "devDependencies": {
+    "@types/irc": "^0.3.32",
     "@types/jest": "~21.1.1",
     "@types/node": "~6.0.88",
     "jest": "~21.2.0",
@@ -37,6 +38,10 @@
   },
   "homepage": "https://github.com/Fidge123/retropie-plays-x#readme",
   "dependencies": {
-    "tslib": "~1.7.1"
+    "@types/optimist": "0.0.29",
+    "irc": "^0.5.2",
+    "optimist": "^0.6.1",
+    "tslib": "~1.7.1",
+    "uinput": "^1.1.0"
   }
 }

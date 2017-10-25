@@ -1,32 +1,68 @@
-/**
- * Some predefined delays (in milliseconds).
- */
-export enum Delays {
-  Short = 500,
-  Medium = 2000,
-  Long = 5000,
+import { WriteStream } from 'fs';
+import { Client } from 'irc';
+import { argv } from 'optimist';
+import * as node_uinput from 'uinput';
+import {
+  allowedInputs,
+  getCommandRegex,
+  getCreateOptions,
+  getSetupOptions,
+  toKey
+  } from './commands';
+import { IUinput } from './interfaces/uinput';
+
+const uinput = node_uinput as IUinput;
+let stream: WriteStream;
+
+if (argv.h || argv.help) {
+  console.log('output usage help'); // TODO
 }
 
-/**
- * Returns a Promise<string> that resolves after given time.
- *
- * @param {string} name - A name.
- * @param {number=} [delay=Delays.Medium] - Number of milliseconds to delay resolution of the Promise.
- * @returns {Promise<string>}
- */
-function delayedHello(name: string, delay: number = Delays.Medium): Promise<string> {
-  return new Promise<string>(
-    (resolve: (value?: string | PromiseLike<string>) => void) => setTimeout(
-      () => resolve(`Hello, ${name}`),
-      delay,
-    ),
-  );
-}
+const config = {
+  server: argv.s || 'freenode.net',
+  channel: argv.c || 'zBzLAN#27',
+  port: argv.p || 7000,
+  delay: argv.d || 100
+};
 
-// Below are examples of using TSLint errors suppression
-// Here it is supressing missing type definitions for greeter function
+const client = new Client(config.server, 'zBzBOT', {
+  channels: [config.channel],
+  port: config.port,
+  secure: true,
+  autoConnect: false,
+  autoRejoin: true
+});
 
-export async function greeter(name) { // tslint:disable-line typedef
-  // tslint:disable-next-line no-unsafe-any
-  return await delayedHello(name, Delays.Long);
-}
+client.addListener('message', (sender: string, message: string): void => {
+  if (message.match(getCommandRegex())) {
+    console.log(`${sender}: ${message}`);
+
+    setTimeout(() => {
+      uinput.key_event(stream, toKey(message as allowedInputs), (error: Error) => {
+        if (error) {
+          throw error;
+        }
+      });
+    }, config.delay);
+  }
+});
+
+client.addListener('error', (message: string): void => {
+  console.log(`error: ${message}`);
+});
+
+client.connect();
+
+uinput.setup(getSetupOptions(), (err0: Error, tempStream: any): void => {
+  if (err0) {
+    throw err0;
+  }
+
+  stream = tempStream;
+
+  uinput.create(stream, getCreateOptions(uinput), (err1: Error) => {
+    if (err1) {
+      throw err1;
+    }
+  });
+});
