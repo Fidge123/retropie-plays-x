@@ -52,7 +52,10 @@ client.addListener('error', (message: string): void => {
   console.log(`error: ${message}`);
 });
 
-client.connect();
+client.connect(5, () => {
+  console.log('Connection successful!');
+  client.say(config.channel, 'BEEP BOOP, I am a bot!');
+});
 console.log('Connecting...');
 
 uinput.setup(getSetupOptions(), (err0: Error, tempStream: any): void => {
