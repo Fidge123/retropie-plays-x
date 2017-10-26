@@ -1,63 +1,63 @@
 import { WriteStream } from 'fs';
 import { Client } from 'irc';
-import { argv } from 'optimist';
 import * as uinput from 'uinput';
+import * as yargs from 'yargs';
 import { allowedInputs, getCommandRegex, getCreateOptions, getSetupOptions, toKey } from './commands';
 
 let stream: WriteStream;
 
-if (argv.h || argv.help) {
-  console.log('output usage help'); // aTODO
-}
+const argv = yargs
+  .usage('Usage: $0 [-s server] [-c channel] [-p port] [-d delay]')
+  .alias('s', 'server')
+  .default('s', 'tolkien.freenode.net')
+  .alias('c', 'channel')
+  .default('c', '#zBzLAN27')
+  .alias('p', 'port')
+  .default('p', 6667)
+  .alias('d', 'delay')
+  .default('d', 100).argv;
 
-const config = {
-  server: argv.s || 'tolkien.freenode.net',
-  channel: argv.c || '#zBzLAN27',
-  port: argv.p || 6667,
-  delay: argv.d || 100
-};
-
-const client = new Client(config.server, 'zBzBOT', {
-  channels: [config.channel],
-  port: config.port,
+const client = new Client(argv.server, 'zBzBOT', {
+  channels: [argv.channel],
+  port: argv.port,
   autoConnect: false,
   autoRejoin: true
 });
 
-client.addListener(`message${config.channel}`, (sender: string, message: string): void => {
+client.addListener(`message${argv.channel}`, (sender: string, message: string): void => {
   if (getCommandRegex().test(message)) {
     console.log(`${sender}: ${message}`);
 
     setTimeout(() => {
-      uinput.key_event(stream, toKey(message as allowedInputs), (error: Error) => {
+      uinput.key_event(stream, toKey(message as allowedInputs), (error: Error | undefined) => {
         if (error) {
           throw error;
         }
       });
-    }, config.delay);
+    }, argv.delay);
   }
 });
 
-client.addListener('error', (message: Error): void => {
+client.addListener('error', (message: Error | undefined): void => {
   console.log('error:', message);
 });
 
 client.connect(5, () => {
   console.log('Connection successful!');
   setTimeout(() => {
-    client.say(config.channel, 'BEEP BOOP, I am a bot!');
+    client.say(argv.channel, 'BEEP BOOP, I am a bot!');
   }, 5000);
 });
 console.log('Connecting...');
 
-uinput.setup(getSetupOptions(), (err0: Error, tempStream: any): void => {
+uinput.setup(getSetupOptions(), (err0: Error | undefined, tempStream: any): void => {
   if (err0) {
     throw err0;
   }
 
   stream = tempStream;
 
-  uinput.create(stream, getCreateOptions(), (err1: Error) => {
+  uinput.create(stream, getCreateOptions(), (err1: Error | undefined) => {
     if (err1) {
       throw err1;
     }
