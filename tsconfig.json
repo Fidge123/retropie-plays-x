@@ -3,25 +3,17 @@
     "target": "es6",
     "module": "commonjs",
     "moduleResolution": "node",
-    "typeRoots": [
-      "node_modules/@types",
-      "types"
-    ],
     "allowSyntheticDefaultImports": true,
     "jsx": "preserve",
     "allowJs": true,
     "importHelpers": true,
-    "alwaysStrict": true,
     "sourceMap": false,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
     "strict": true,
-    "strictNullChecks": true,
     "declaration": true
   },
   "include": ["src/**/*", "tests/**/*"]
