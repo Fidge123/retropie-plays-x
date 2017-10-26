@@ -1,13 +1,13 @@
 import { WriteStream } from 'fs';
 import { Client } from 'irc';
 import { argv } from 'optimist';
-import { uinput } from 'uinput';
+import * as uinput from 'uinput';
 import { allowedInputs, getCommandRegex, getCreateOptions, getSetupOptions, toKey } from './commands';
 
 let stream: WriteStream;
 
 if (argv.h || argv.help) {
-  console.log('output usage help'); // TODO
+  console.log('output usage help'); // aTODO
 }
 
 const config = {

@@ -54,7 +54,7 @@ const keyMap = {
   down: uinput.KEY_DOWN,
   left: uinput.KEY_LEFT,
   right: uinput.KEY_RIGHT,
-  admin_end_game: uinput.KEY_END, // TODO Combo
+  admin_end_game: uinput.KEY_END, // aTODO Combo
   admin_save_game: uinput.KEY_SAVE,
   admin_load_game: uinput.KEY_REFRESH
 };
