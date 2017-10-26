@@ -34,7 +34,7 @@ describe('Utility functions', () => {
   });
 
   it('toKey', () => {
-    expect(toKey('a')).toContain(KEY_A);
-    expect(toKey('down')).toContain(KEY_DOWN);
+    expect(toKey('a')).toBe(KEY_A);
+    expect(toKey('down')).toBe(KEY_DOWN);
   });
 });
