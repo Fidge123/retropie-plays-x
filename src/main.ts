@@ -17,9 +17,9 @@ const argv = yargs
   .alias('d', 'delay')
   .default('d', 100).argv;
 
-const client = new Client(argv.server, 'zBzBOT', {
-  channels: [argv.channel],
-  port: argv.port,
+const client = new Client(argv.server as string, 'zBzBOT', {
+  channels: [argv.channel as string],
+  port: argv.port as number,
   autoConnect: false,
   autoRejoin: true
 });
@@ -29,8 +29,8 @@ client.addListener(`message${argv.channel}`, (sender: string, message: string): 
     console.log(`${sender}: ${message}`);
 
     setTimeout(() => {
-      key_event(stream, toKey(message as allowedInputs), (error: Error | undefined) => {
-        if (error) {
+      key_event(stream, toKey(message as allowedInputs), (error?: Error) => {
+        if (error instanceof Error) {
           throw error;
         }
       });
@@ -38,27 +38,27 @@ client.addListener(`message${argv.channel}`, (sender: string, message: string): 
   }
 });
 
-client.addListener('error', (message: Error | undefined): void => {
-  console.log('error:', message);
+client.addListener('error', (error?: Error): void => {
+  console.log('error:', error);
 });
 
 client.connect(5, () => {
   console.log('Connection successful!');
   setTimeout(() => {
-    client.say(argv.channel, 'BEEP BOOP, I am a bot!');
+    client.say(argv.channel as string, 'BEEP BOOP, I am a bot!');
   }, 5000);
 });
 console.log('Connecting...');
 
-setup(getSetupOptions(), (err0: Error | undefined, tempStream: any): void => {
-  if (err0) {
+setup(getSetupOptions(), (err0: Error | undefined, tempStream: WriteStream): void => {
+  if (err0 instanceof Error) {
     throw err0;
   }
 
   stream = tempStream;
 
-  create(stream, getCreateOptions(), (err1: Error | undefined) => {
-    if (err1) {
+  create(stream, getCreateOptions(), (err1?: Error) => {
+    if (err1 instanceof Error) {
       throw err1;
     }
   });
