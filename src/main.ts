@@ -1,6 +1,6 @@
 import { WriteStream } from 'fs';
 import { Client } from 'irc';
-import * as uinput from 'uinput';
+import { create, key_event, setup } from 'uinput';
 import * as yargs from 'yargs';
 import { allowedInputs, getCommandRegex, getCreateOptions, getSetupOptions, toKey } from './commands';
 
@@ -29,7 +29,7 @@ client.addListener(`message${argv.channel}`, (sender: string, message: string): 
     console.log(`${sender}: ${message}`);
 
     setTimeout(() => {
-      uinput.key_event(stream, toKey(message as allowedInputs), (error: Error | undefined) => {
+      key_event(stream, toKey(message as allowedInputs), (error: Error | undefined) => {
         if (error) {
           throw error;
         }
@@ -50,14 +50,14 @@ client.connect(5, () => {
 });
 console.log('Connecting...');
 
-uinput.setup(getSetupOptions(), (err0: Error | undefined, tempStream: any): void => {
+setup(getSetupOptions(), (err0: Error | undefined, tempStream: any): void => {
   if (err0) {
     throw err0;
   }
 
   stream = tempStream;
 
-  uinput.create(stream, getCreateOptions(), (err1: Error | undefined) => {
+  create(stream, getCreateOptions(), (err1: Error | undefined) => {
     if (err1) {
       throw err1;
     }
