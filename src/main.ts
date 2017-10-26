@@ -52,6 +52,7 @@ client.addListener(`message${argv.channel}`, (sender: string, message: string): 
         if (error instanceof Error) {
           throw error;
         }
+        stream.removeAllListeners('error');
       });
     }, argv.delay);
   }
