@@ -31,9 +31,9 @@ export function getCreateOptions(): any {
   return {
     name: 'myuinput',
     id: {
-      bustype: uinput.BUS_VIRTUAL,
-      vendor: 0x1,
-      product: 0x1,
+      bustype: uinput.BUS_USB,
+      vendor: 0x1234,
+      product: 0x5678,
       version: 1
     }
   };

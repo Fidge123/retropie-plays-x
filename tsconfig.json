@@ -8,17 +8,18 @@
     "allowJs": true,
     "importHelpers": true,
     "alwaysStrict": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "noImplicitThis": true,
-    "strict": false,
+    "strict": true,
     "strictNullChecks": true,
     "declaration": true
   },
+  "typeRoots": ["./node_modules/@types", "./typings"],
   "include": ["src/**/*", "tests/**/*"]
 }
