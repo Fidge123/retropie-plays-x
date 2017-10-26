@@ -1,4 +1,4 @@
-describe('TODO', () => {
+describe('Main functions', () => {
   jest.useFakeTimers();
 
   beforeAll(() => {

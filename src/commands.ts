@@ -40,7 +40,7 @@ const keyMap: { [key: string]: number } = {
 };
 
 export function getCommandRegex(): RegExp {
-  return /^a|b|x|y|start|select|l1|l2|r1|r2|up|down|left|right|admin_end_game|admin_save_game|admin_load_game$/i;
+  return /^(a|b|x|y|start|select|l1|l2|r1|r2|up|down|left|right|admin_end_game|admin_save_game|admin_load_game)$/i;
 }
 
 export function getSetupOptions(): uinput.ISetupOptions {
