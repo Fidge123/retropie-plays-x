@@ -7,15 +7,34 @@ import { allowedInputs, getCommandRegex, getCreateOptions, getSetupOptions, toKe
 let stream: WriteStream;
 
 const argv = yargs
-  .usage('Usage: $0 [-s server] [-c channel] [-p port] [-d delay]')
-  .alias('s', 'server')
-  .default('s', 'tolkien.freenode.net')
-  .alias('c', 'channel')
-  .default('c', '#zBzLAN27')
-  .alias('p', 'port')
-  .default('p', 6667)
-  .alias('d', 'delay')
-  .default('d', 100).argv;
+  .option('server', {
+    alias: 's',
+    default: 'tolkien.freenode.net',
+    describe: 'IRC server URL',
+    nargs: 1,
+    type: 'string'
+  })
+  .option('channel', {
+    alias: 'c',
+    default: '#zBzLAN27',
+    describe: 'IRC channel name, should start with #',
+    nargs: 1,
+    type: 'string'
+  })
+  .option('port', {
+    alias: 'p',
+    default: 6667,
+    describe: 'IRC port',
+    nargs: 1,
+    type: 'number'
+  })
+  .option('delay', {
+    alias: 'd',
+    default: 200,
+    describe: 'Delay between IRC and game input',
+    nargs: 1,
+    type: 'number'
+  }).argv;
 
 const client = new Client(argv.server as string, 'zBzBOT', {
   channels: [argv.channel as string],
