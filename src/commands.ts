@@ -39,7 +39,7 @@ export function getCreateOptions(): any {
   };
 }
 
-const keyMap = {
+const keyMap: { [key: string]: number } = {
   a: uinput.KEY_A,
   b: uinput.KEY_B,
   x: uinput.KEY_X,
