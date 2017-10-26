@@ -1,4 +1,4 @@
-/// <reference path="../types/uinput/index.d.ts.d.ts" />
+/// <reference path="../types/uinput/index.d.ts" />
 
 import { WriteStream } from 'fs';
 import { Client } from 'irc';

@@ -1,6 +1,6 @@
 import { WriteStream } from 'fs';
 
-declare module uinput {
+declare module 'uinput' {
   interface ISetupOptions {
     EV_KEY: any[];
   }
