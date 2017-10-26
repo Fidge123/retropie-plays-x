@@ -33,7 +33,7 @@ describe('Utility functions', () => {
     expect(options.id).toHaveProperty('product');
   });
 
-  it('toKey', () => {
+  it('should turn irc input into uinput key', () => {
     expect(toKey('a')).toBe(KEY_A);
     expect(toKey('down')).toBe(KEY_DOWN);
   });
