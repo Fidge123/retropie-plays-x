@@ -1,14 +1,10 @@
+/// <reference path="../types/uinput/index.d.ts.d.ts" />
+
 import { WriteStream } from 'fs';
 import { Client } from 'irc';
 import { argv } from 'optimist';
-import * as uinput from 'uinput';
-import {
-  allowedInputs,
-  getCommandRegex,
-  getCreateOptions,
-  getSetupOptions,
-  toKey
-  } from './commands';
+import { uinput } from 'uinput';
+import { allowedInputs, getCommandRegex, getCreateOptions, getSetupOptions, toKey } from './commands';
 
 let stream: WriteStream;
 
