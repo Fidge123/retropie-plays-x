@@ -1,7 +1,7 @@
 import { WriteStream } from 'fs';
 import { Client } from 'irc';
 import { argv } from 'optimist';
-import * as node_uinput from 'uinput';
+import * as uinput from 'uinput';
 import {
   allowedInputs,
   getCommandRegex,
@@ -9,9 +9,7 @@ import {
   getSetupOptions,
   toKey
   } from './commands';
-import { IUinput } from './interfaces/uinput';
 
-const uinput = node_uinput as IUinput;
 let stream: WriteStream;
 
 if (argv.h || argv.help) {
@@ -38,7 +36,6 @@ client.addListener(`message${config.channel}`, (sender: string, message: string)
 
     setTimeout(() => {
       uinput.key_event(stream, toKey(message as allowedInputs), (error: Error) => {
-        console.log(`key event triggered: ${toKey(message as allowedInputs)}`);
         if (error) {
           throw error;
         }
@@ -66,7 +63,7 @@ uinput.setup(getSetupOptions(), (err0: Error, tempStream: any): void => {
 
   stream = tempStream;
 
-  uinput.create(stream, getCreateOptions(uinput), (err1: Error) => {
+  uinput.create(stream, getCreateOptions(), (err1: Error) => {
     if (err1) {
       throw err1;
     }

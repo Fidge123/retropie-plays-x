@@ -1,4 +1,4 @@
-import { ICreateOptions, ISetupOptions, Keys } from './interfaces/uinput';
+import * as uinput from 'uinput';
 
 export type allowedInputs =
   | 'a'
@@ -23,11 +23,11 @@ export function getCommandRegex(): RegExp {
   return /^a|b|x|y|start|select|l1|l2|r1|r2|up|down|left|right|admin_end_game|admin_save_game|admin_load_game$/i;
 }
 
-export function getSetupOptions(): ISetupOptions {
-  return { EV_KEY: [] };
+export function getSetupOptions(): any {
+  return { EV_KEY: Object.keys(keyMap).map((key: string): any => keyMap[key]) };
 }
 
-export function getCreateOptions(uinput: any): ICreateOptions {
+export function getCreateOptions(): any {
   return {
     name: 'myuinput',
     id: {
@@ -40,25 +40,25 @@ export function getCreateOptions(uinput: any): ICreateOptions {
 }
 
 const keyMap = {
-  a: Keys.KEY_A,
-  b: Keys.KEY_B,
-  x: Keys.KEY_X,
-  y: Keys.KEY_Y,
-  start: Keys.KEY_S,
-  select: Keys.KEY_E,
-  l1: Keys.KEY_1,
-  l2: Keys.KEY_2,
-  r1: Keys.KEY_3,
-  r2: Keys.KEY_4,
-  up: Keys.KEY_UP,
-  down: Keys.KEY_DOWN,
-  left: Keys.KEY_LEFT,
-  right: Keys.KEY_RIGHT,
-  admin_end_game: Keys.KEY_END, // TODO Combo
-  admin_save_game: Keys.KEY_SAVE,
-  admin_load_game: Keys.KEY_REFRESH
+  a: uinput.KEY_A,
+  b: uinput.KEY_B,
+  x: uinput.KEY_X,
+  y: uinput.KEY_Y,
+  start: uinput.KEY_S,
+  select: uinput.KEY_E,
+  l1: uinput.KEY_1,
+  l2: uinput.KEY_2,
+  r1: uinput.KEY_3,
+  r2: uinput.KEY_4,
+  up: uinput.KEY_UP,
+  down: uinput.KEY_DOWN,
+  left: uinput.KEY_LEFT,
+  right: uinput.KEY_RIGHT,
+  admin_end_game: uinput.KEY_END, // TODO Combo
+  admin_save_game: uinput.KEY_SAVE,
+  admin_load_game: uinput.KEY_REFRESH
 };
 
-export function toKey(ircInput: allowedInputs): Keys {
+export function toKey(ircInput: allowedInputs): number {
   return keyMap[ircInput];
 }
