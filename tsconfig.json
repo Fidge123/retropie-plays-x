@@ -4,8 +4,8 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "typeRoots": [
-      "./node_modules/@types",
-      "./types"
+      "node_modules/@types",
+      "types"
     ],
     "allowSyntheticDefaultImports": true,
     "jsx": "preserve",
@@ -24,5 +24,5 @@
     "strictNullChecks": true,
     "declaration": true
   },
-  "include": ["src/**/*", "types/**/*", "tests/**/*"]
+  "include": ["src/**/*", "tests/**/*"]
 }

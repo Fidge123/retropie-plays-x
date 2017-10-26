@@ -1,5 +1,3 @@
-/// <reference path="../types/uinput/index.d.ts" />
-
 import { WriteStream } from 'fs';
 import { Client } from 'irc';
 import { argv } from 'optimist';
