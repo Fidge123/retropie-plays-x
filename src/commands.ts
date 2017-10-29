@@ -48,7 +48,7 @@ export function getSetupOptions(): uinput.ISetupOptions {
 }
 
 export function getCreateOptions(): uinput.ICreateOptions {
-  const id: uinput.ICreateID = { bustype: uinput.BUS_USB, vendor: 0x1234, product: 0x5678, version: 1 };
+  const id: uinput.ICreateID = { bustype: uinput.BUS_VIRTUAL, vendor: 0x1234, product: 0x5678, version: 1 };
 
   return { name: 'myuinput', id } as uinput.ICreateOptions;
 }
