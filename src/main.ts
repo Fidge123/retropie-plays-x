@@ -9,7 +9,7 @@ let stream: WriteStream;
 const argv = yargs
   .option('server', {
     alias: 's',
-    default: 'tolkien.freenode.net',
+    default: 'irc.freenode.net',
     describe: 'IRC server URL',
     nargs: 1,
     type: 'string'
