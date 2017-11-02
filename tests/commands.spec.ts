@@ -1,4 +1,4 @@
-import { KEY_A, KEY_DOWN } from 'uinput';
+import { BTN_0, BTN_DPAD_DOWN, KEY_ESC } from 'uinput';
 import { getCommandRegex, getCreateOptions, getSetupOptions, toKey } from '../src/commands';
 
 describe('Utility functions', () => {
@@ -24,7 +24,7 @@ describe('Utility functions', () => {
 
   it('should return the setup options', () => {
     const options = getSetupOptions();
-    expect(options.EV_KEY).toContain(KEY_A);
+    expect(options.EV_KEY).toContain(KEY_ESC);
   });
 
   it('should return the create options', () => {
@@ -34,7 +34,7 @@ describe('Utility functions', () => {
   });
 
   it('should turn irc input into uinput key', () => {
-    expect(toKey('a')).toBe(KEY_A);
-    expect(toKey('down')).toBe(KEY_DOWN);
+    expect(toKey('a')).toBe(BTN_0);
+    expect(toKey('down')).toBe(BTN_DPAD_DOWN);
   });
 });
