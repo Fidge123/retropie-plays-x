@@ -46,7 +46,7 @@ const keyMap: { [key: string]: number } = {
 };
 
 export function getCommandRegex(): RegExp {
-  return new RegExp(`/^(${Object.keys(keyMap).join('|')})$/i`);
+  return new RegExp(`^(${Object.keys(keyMap).join('|')})$`, 'i');
 }
 
 export function getSetupOptions(): uinput.ISetupOptions {
