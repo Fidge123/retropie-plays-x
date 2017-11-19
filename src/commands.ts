@@ -49,11 +49,11 @@ export function getCommandRegex(): RegExp {
   return new RegExp(`^(${Object.keys(keyMap).join('|')})$`, 'i');
 }
 
-export function getSetupOptions(): uinput.ISetupOptions {
-  return { EV_KEY: Object.keys(keyMap).map((key: string): any => keyMap[key]) } as uinput.ISetupOptions;
+export function getSetupOptions(): uinput.SetupOptions {
+  return { EV_KEY: Object.keys(keyMap).map((key: string): any => keyMap[key]) } as uinput.SetupOptions;
 }
 
-export function getCreateOptions(): uinput.ICreateOptions {
+export function getCreateOptions(): uinput.CreateOptions {
   const absmax: number[] = [];
   absmax[uinput.ABS_X] = 255;
   absmax[uinput.ABS_Y] = 255;
@@ -67,7 +67,7 @@ export function getCreateOptions(): uinput.ICreateOptions {
   absflat[uinput.ABS_X] = 15;
   absflat[uinput.ABS_X] = 15;
 
-  const id: uinput.ICreateID = {
+  const id: uinput.CreateID = {
     bustype: uinput.BUS_USB,
     vendor: 0x045e,
     product: 0x028e,
@@ -79,7 +79,7 @@ export function getCreateOptions(): uinput.ICreateOptions {
     absflat
   };
 
-  return { name: 'Microsoft X-Box 360 pad', id } as uinput.ICreateOptions;
+  return { name: 'Microsoft X-Box 360 pad', id } as uinput.CreateOptions;
 }
 
 export function toKey(ircInput: allowedInputs): number {
