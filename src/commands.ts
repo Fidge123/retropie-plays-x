@@ -43,14 +43,14 @@ export function getCommandRegex(): RegExp {
   return /^(a|b|x|y|start|select|l1|l2|r1|r2|up|down|left|right|admin_end_game|admin_save_game|admin_load_game)$/i;
 }
 
-export function getSetupOptions(): uinput.ISetupOptions {
-  return { EV_KEY: Object.keys(keyMap).map((key: string): any => keyMap[key]) } as uinput.ISetupOptions;
+export function getSetupOptions(): uinput.SetupOptions {
+  return { EV_KEY: Object.keys(keyMap).map((key: string): any => keyMap[key]) } as uinput.SetupOptions;
 }
 
-export function getCreateOptions(): uinput.ICreateOptions {
-  const id: uinput.ICreateID = { bustype: uinput.BUS_VIRTUAL, vendor: 0x1234, product: 0x5678, version: 1 };
+export function getCreateOptions(): uinput.CreateOptions {
+  const id: uinput.CreateID = { bustype: uinput.BUS_VIRTUAL, vendor: 0x1234, product: 0x5678, version: 1 };
 
-  return { name: 'myuinput', id } as uinput.ICreateOptions;
+  return { name: 'myuinput', id } as uinput.CreateOptions;
 }
 
 export function toKey(ircInput: allowedInputs): number {
